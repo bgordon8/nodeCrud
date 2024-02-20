@@ -12,4 +12,9 @@ async function getUserById(id: number) {
   return user;
 }
 
-export { getAllUsers, getUserById };
+async function deleteUser(id: number) {
+  const user = await db('users').where({ id }).del().returning('*');
+  return user;
+}
+
+export { getAllUsers, getUserById, deleteUser };
