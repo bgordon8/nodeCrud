@@ -4,9 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "husky install"
+    "dev": "nodemon",
+    "test.unit": "jest",
+    "test.integration": "jest integration -i",
+    "test": "npm run test.unit && npm run test.integration",
+    "prepare": "husky install",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
