@@ -1,9 +1,17 @@
 import express from 'express';
-
+import getAllUsers from '../controllers/userController';
 const router = express.Router();
 
-router.get('/', (req, res, next) => {
-  res.status(200).json({ success: true, message: 'hello world from routes' });
+router.get('/users', async (req, res, next) => {
+  try {
+    const users = await getAllUsers();
+    res.status(200).json({ success: true, users });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error.message || 'something went wrong',
+    });
+  }
 });
 
 export default router;
