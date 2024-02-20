@@ -4,6 +4,7 @@ import {
   getUserById,
   deleteUser,
   createUser,
+  updateUser,
 } from '../controllers/userController';
 const router = express.Router();
 
@@ -46,6 +47,18 @@ router.delete('/users/:id', async (req, res, next) => {
 router.post('/users', async (req, res, next) => {
   try {
     const user = await createUser(req);
+    res.status(200).json({ success: true, user });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error.message || 'something went wrong',
+    });
+  }
+});
+
+router.put('/users/:id', async (req, res, next) => {
+  try {
+    const user = await updateUser(req);
     res.status(200).json({ success: true, user });
   } catch (error: any) {
     res.status(500).json({
