@@ -10,4 +10,6 @@ export async function seed(knex: Knex): Promise<void> {
     { id: 2, email: 'rowValue2', username: 'second' },
     { id: 3, email: 'rowValue3', username: 'third' },
   ]);
+
+  await knex.raw("SELECT setval('users_id_seq', (SELECT MAX(id) FROM users))");
 }

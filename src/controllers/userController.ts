@@ -1,4 +1,5 @@
 import db from '../db';
+import { Request } from 'express';
 
 async function getAllUsers() {
   const users = await db('users').select();
@@ -17,4 +18,15 @@ async function deleteUser(id: number) {
   return user;
 }
 
-export { getAllUsers, getUserById, deleteUser };
+async function createUser(req: Request) {
+  const [user] = await db('users')
+    .insert({
+      email: req.body.email,
+      username: req.body.username,
+    })
+    .returning('*');
+
+  return user;
+}
+
+export { getAllUsers, getUserById, deleteUser, createUser };
