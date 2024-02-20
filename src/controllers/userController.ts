@@ -6,4 +6,10 @@ async function getAllUsers() {
   return users;
 }
 
-export default getAllUsers;
+async function getUserById(id: number) {
+  const user = await db('users').where({ id }).first();
+
+  return user;
+}
+
+export { getAllUsers, getUserById };
